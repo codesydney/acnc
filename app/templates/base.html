@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ title or "Australian Charities" }}{% endblock %}</title>
+    <link rel="icon" type="image/svg+xml" href="/static/img/vc-logo.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#000000',
+                        secondary: '#6B7280',
+                        accent: '#000000',
+                        danger: '#000000'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'hand': ['Kalam', 'cursive', 'system-ui']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    {% block head %}{% endblock %}
+</head>
+<body class="h-full bg-white">
+    <div class="min-h-full">
+        <!-- Navigation -->
+        <nav class="bg-white border-b-2 border-black">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <h1 class="text-2xl font-hand font-bold text-black flex items-center">
+                                <img src="/static/img/vc-logo.svg" alt="Logo" class="w-8 h-8 mr-2">
+                                Australian Charities
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <a href="/" class="text-black hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium font-hand">
+                            <i class="fas fa-search mr-1"></i>
+                            Search
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="flex-1">
+            {% block content %}{% endblock %}
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-white border-t-2 border-black py-8 mt-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center space-y-4">
+                    <div class="text-sm text-gray-600 font-sans">
+                        <p>Data sourced from <a href="https://data.gov.au/data/dataset/acnc-register" target="_blank" class="text-black hover:underline font-medium">ACNC Registered Charities</a></p>
+                        <p>Licensed under <a href="http://creativecommons.org/licenses/by/3.0/au/" target="_blank" class="text-black hover:underline font-medium">Creative Commons Attribution 3.0 Australia</a></p>
+                    </div>
+                    <div class="text-sm text-black font-hand">
+                        <p>A <a href="https://vibecamp.au/" target="_blank" class="text-black hover:underline font-bold">Vibecamp</a> Creation</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,450 @@
+{% extends "base.html" %}
+
+{% block title %}Australian Charities - Discover & Search{% endblock %}
+
+{% block content %}
+<div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-hand font-bold text-black mb-4">
+                Discover Australian Charities
+            </h1>
+            <p class="text-base sm:text-lg md:text-xl text-gray-600 mb-6 sm:mb-8 font-sans">
+                Find charities that align with your values and make a meaningful impact
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Search Section -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="bg-white border-2 border-black rounded-lg shadow-lg p-4 sm:p-6 mb-6 sm:mb-8">
+        <h2 class="text-xl sm:text-2xl font-hand font-bold text-black mb-4 sm:mb-6">
+            <i class="fas fa-search mr-2 text-black"></i>
+            Search Charities
+        </h2>
+        
+        <form id="searchForm" class="space-y-4 sm:space-y-6">
+            <!-- Search Query -->
+            <div>
+                <label for="query" class="block text-sm font-medium text-black mb-2 font-hand">
+                    Search by name or keywords
+                </label>
+                <div class="relative">
+                    <input 
+                        type="text" 
+                        id="query" 
+                        name="query"
+                        class="w-full px-4 py-3 pl-10 border-2 border-black rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-base sm:text-lg font-sans"
+                        placeholder="e.g., education, health, environment..."
+                    >
+                    <i class="fas fa-search absolute left-3 top-4 text-black"></i>
+                </div>
+            </div>
+
+            <!-- Filters Row -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- State Filter -->
+                <div>
+                    <label for="state" class="block text-sm font-medium text-black mb-2 font-hand">
+                        State
+                    </label>
+                    <select 
+                        id="state" 
+                        name="state"
+                        class="w-full px-3 py-2 border-2 border-black rounded-md focus:ring-2 focus:ring-black focus:border-transparent font-sans"
+                    >
+                        <option value="">All States</option>
+                        <option value="ACT">ACT</option>
+                        <option value="NSW">NSW</option>
+                        <option value="NT">NT</option>
+                        <option value="QLD">QLD</option>
+                        <option value="SA">SA</option>
+                        <option value="TAS">TAS</option>
+                        <option value="VIC">VIC</option>
+                        <option value="WA">WA</option>
+                    </select>
+                </div>
+
+                <!-- Size Filter -->
+                <div>
+                    <label for="charity_size" class="block text-sm font-medium text-black mb-2 font-hand">
+                        Size
+                    </label>
+                    <select 
+                        id="charity_size" 
+                        name="charity_size"
+                        class="w-full px-3 py-2 border-2 border-black rounded-md focus:ring-2 focus:ring-black focus:border-transparent font-sans"
+                    >
+                        <option value="">All Sizes</option>
+                        <option value="Small">Small</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Large">Large</option>
+                    </select>
+                </div>
+
+                <!-- Purpose Filter -->
+                <div>
+                    <label for="purpose" class="block text-sm font-medium text-black mb-2 font-hand">
+                        Purpose
+                    </label>
+                    <select 
+                        id="purpose" 
+                        name="purpose"
+                        class="w-full px-3 py-2 border-2 border-black rounded-md focus:ring-2 focus:ring-black focus:border-transparent font-sans"
+                    >
+                        <option value="">All Purposes</option>
+                        <option value="advancing_education">Education</option>
+                        <option value="advancing_health">Health</option>
+                        <option value="advancing_natural_environment">Environment</option>
+                        <option value="advancing_religion">Religion</option>
+                        <option value="advancing_social_or_public_welfare">Social Welfare</option>
+                        <option value="advancing_culture">Culture</option>
+                        <option value="promoting_or_protecting_human_rights">Human Rights</option>
+                        <option value="preventing_or_relieving_suffering_of_animals">Animals</option>
+                    </select>
+                </div>
+
+                <!-- Beneficiary Filter -->
+                <div>
+                    <label for="beneficiary" class="block text-sm font-medium text-black mb-2 font-hand">
+                        Beneficiaries
+                    </label>
+                    <select 
+                        id="beneficiary" 
+                        name="beneficiary"
+                        class="w-full px-3 py-2 border-2 border-black rounded-md focus:ring-2 focus:ring-black focus:border-transparent font-sans"
+                    >
+                        <option value="">All Beneficiaries</option>
+                        <option value="children">Children</option>
+                        <option value="aged_persons">Aged Persons</option>
+                        <option value="people_with_disabilities">People with Disabilities</option>
+                        <option value="families">Families</option>
+                        <option value="youth">Youth</option>
+                        <option value="adults">Adults</option>
+                        <option value="financially_disadvantaged">Financially Disadvantaged</option>
+                        <option value="general_community_in_australia">General Community</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Additional Options -->
+            <div class="flex items-center space-x-4">
+                <label class="flex items-center">
+                    <input 
+                        type="checkbox" 
+                        id="has_website" 
+                        name="has_website"
+                        class="rounded border-2 border-black text-black focus:ring-black"
+                    >
+                    <span class="ml-2 text-sm text-black font-hand">Has website</span>
+                </label>
+            </div>
+
+            <!-- Search Button -->
+            <div class="flex justify-center">
+                <button 
+                    type="submit"
+                    class="w-full sm:w-auto bg-black text-white px-6 sm:px-8 py-3 rounded-lg hover:bg-gray-800 focus:ring-2 focus:ring-black focus:ring-offset-2 transition-colors duration-200 font-hand font-bold text-base sm:text-lg"
+                >
+                    <i class="fas fa-search mr-2"></i>
+                    Search Charities
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Results Section -->
+    <div id="resultsSection" class="hidden">
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 sm:mb-6 space-y-2 sm:space-y-0">
+            <h3 class="text-lg sm:text-xl font-hand font-bold text-black">
+                Search Results
+            </h3>
+            <div id="resultsInfo" class="text-sm text-black font-sans"></div>
+        </div>
+        
+        <div id="charitiesList" class="space-y-4">
+            <!-- Results will be populated here -->
+        </div>
+
+        <!-- Pagination -->
+        <div id="pagination" class="mt-8 flex justify-center">
+            <!-- Pagination will be populated here -->
+        </div>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loadingState" class="hidden text-center py-12">
+        <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-black"></div>
+        <p class="mt-2 text-black font-hand">Searching charities...</p>
+    </div>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="hidden text-center py-12">
+        <i class="fas fa-search text-4xl text-black mb-4"></i>
+        <h3 class="text-lg font-medium text-black mb-2 font-hand">No charities found</h3>
+        <p class="text-black font-sans">Try adjusting your search criteria</p>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+class CharitySearch {
+    constructor() {
+        this.currentPage = 0;
+        this.pageSize = 20;
+        this.init();
+    }
+
+    init() {
+        this.bindEvents();
+    }
+
+    bindEvents() {
+        const form = document.getElementById('searchForm');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.search();
+        });
+    }
+
+    async search(page = 0) {
+        this.currentPage = page;
+        this.showLoading();
+        
+        const formData = new FormData(document.getElementById('searchForm'));
+        const params = new URLSearchParams();
+        
+        for (const [key, value] of formData.entries()) {
+            if (value) params.append(key, value);
+        }
+        
+        params.append('limit', this.pageSize);
+        params.append('offset', page * this.pageSize);
+
+        try {
+            const response = await fetch(`/api/v1/charities/search?${params}`);
+            const data = await response.json();
+            
+            this.displayResults(data);
+        } catch (error) {
+            console.error('Search error:', error);
+            this.showError('Failed to search charities. Please try again.');
+        }
+    }
+
+    displayResults(data) {
+        this.hideLoading();
+        
+        if (data.charities.length === 0) {
+            this.showEmpty();
+            return;
+        }
+
+        this.showResults();
+        this.updateResultsInfo(data);
+        this.renderCharities(data.charities);
+        this.renderPagination(data);
+    }
+
+    renderCharities(charities) {
+        const container = document.getElementById('charitiesList');
+        container.innerHTML = charities.map(charity => this.createCharityCard(charity)).join('');
+    }
+
+    createCharityCard(charity) {
+        const website = charity.charity_website ? 
+            `<a href="${charity.charity_website}" target="_blank" class="text-primary hover:text-blue-700">
+                <i class="fas fa-external-link-alt mr-1"></i>
+                Visit Website
+            </a>` : 
+            '<span class="text-gray-400">No website</span>';
+
+        const location = [charity.town_city, charity.state, charity.postcode]
+            .filter(Boolean)
+            .join(', ') || 'Location not specified';
+
+        const purposes = this.getActivePurposes(charity);
+        const beneficiaries = this.getActiveBeneficiaries(charity);
+
+        return `
+            <div class="bg-white border-2 border-black rounded-lg shadow-md p-4 sm:p-6 hover:shadow-lg transition-shadow duration-200">
+                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 space-y-2 sm:space-y-0">
+                    <h3 class="text-lg sm:text-xl font-hand font-bold text-black">${charity.charity_legal_name || 'Unnamed Charity'}</h3>
+                    <span class="px-3 py-1 bg-black text-white text-xs sm:text-sm rounded-full self-start sm:self-auto font-sans">
+                        ${charity.charity_size || 'Unknown'}
+                    </span>
+                </div>
+                
+                <div class="space-y-3">
+                    <div class="flex items-center text-black">
+                        <i class="fas fa-map-marker-alt mr-2 text-black"></i>
+                        <span class="font-sans">${location}</span>
+                    </div>
+                    
+                    ${charity.other_organisation_names ? `
+                        <div class="flex items-center text-black">
+                            <i class="fas fa-tag mr-2 text-black"></i>
+                            <span class="font-sans">${charity.other_organisation_names}</span>
+                        </div>
+                    ` : ''}
+                    
+                    <div class="flex items-center text-black">
+                        <i class="fas fa-globe mr-2 text-black"></i>
+                        <span class="font-sans">${website}</span>
+                    </div>
+                </div>
+
+                ${purposes.length > 0 ? `
+                    <div class="mt-4">
+                        <h4 class="text-sm font-medium text-black mb-2 font-hand">Purposes:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            ${purposes.map(purpose => `
+                                <span class="px-2 py-1 bg-black text-white text-xs rounded-full font-sans">
+                                    ${purpose}
+                                </span>
+                            `).join('')}
+                        </div>
+                    </div>
+                ` : ''}
+
+                ${beneficiaries.length > 0 ? `
+                    <div class="mt-4">
+                        <h4 class="text-sm font-medium text-black mb-2 font-hand">Beneficiaries:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            ${beneficiaries.map(beneficiary => `
+                                <span class="px-2 py-1 bg-black text-white text-xs rounded-full font-sans">
+                                    ${beneficiary}
+                                </span>
+                            `).join('')}
+                        </div>
+                    </div>
+                ` : ''}
+            </div>
+        `;
+    }
+
+    getActivePurposes(charity) {
+        const purposeMap = {
+            'advancing_education': 'Education',
+            'advancing_health': 'Health',
+            'advancing_natural_environment': 'Environment',
+            'advancing_religion': 'Religion',
+            'advancing_social_or_public_welfare': 'Social Welfare',
+            'advancing_culture': 'Culture',
+            'promoting_or_protecting_human_rights': 'Human Rights',
+            'preventing_or_relieving_suffering_of_animals': 'Animals'
+        };
+
+        return Object.entries(purposeMap)
+            .filter(([key, _]) => charity[key])
+            .map(([_, value]) => value)
+            .slice(0, 3); // Limit to 3 purposes
+    }
+
+    getActiveBeneficiaries(charity) {
+        const beneficiaryMap = {
+            'children': 'Children',
+            'aged_persons': 'Aged Persons',
+            'people_with_disabilities': 'People with Disabilities',
+            'families': 'Families',
+            'youth': 'Youth',
+            'adults': 'Adults',
+            'financially_disadvantaged': 'Financially Disadvantaged',
+            'general_community_in_australia': 'General Community'
+        };
+
+        return Object.entries(beneficiaryMap)
+            .filter(([key, _]) => charity[key])
+            .map(([_, value]) => value)
+            .slice(0, 3); // Limit to 3 beneficiaries
+    }
+
+    renderPagination(data) {
+        const container = document.getElementById('pagination');
+        if (!data.has_more && data.offset === 0) {
+            container.innerHTML = '';
+            return;
+        }
+
+        const totalPages = Math.ceil(data.total / data.limit);
+        const currentPage = Math.floor(data.offset / data.limit) + 1;
+
+        let paginationHTML = '<nav class="flex flex-wrap items-center justify-center gap-2 sm:gap-1">';
+        
+        // Previous button
+        if (currentPage > 1) {
+            paginationHTML += `
+                <button onclick="charitySearch.search(${currentPage - 2})" 
+                        class="px-3 py-2 text-sm font-medium text-black bg-white border-2 border-black rounded-md hover:bg-black hover:text-white min-w-[80px] font-hand">
+                    Previous
+                </button>
+            `;
+        }
+
+        // Page numbers
+        for (let i = Math.max(1, currentPage - 2); i <= Math.min(totalPages, currentPage + 2); i++) {
+            const isActive = i === currentPage;
+            paginationHTML += `
+                <button onclick="charitySearch.search(${i - 1})" 
+                        class="px-3 py-2 text-sm font-medium ${isActive ? 'text-white bg-black' : 'text-black bg-white border-2 border-black hover:bg-black hover:text-white'} rounded-md min-w-[40px] font-hand">
+                    ${i}
+                </button>
+            `;
+        }
+
+        // Next button
+        if (currentPage < totalPages) {
+            paginationHTML += `
+                <button onclick="charitySearch.search(${currentPage})" 
+                        class="px-3 py-2 text-sm font-medium text-black bg-white border-2 border-black rounded-md hover:bg-black hover:text-white min-w-[80px] font-hand">
+                    Next
+                </button>
+            `;
+        }
+
+        paginationHTML += '</nav>';
+        container.innerHTML = paginationHTML;
+    }
+
+    updateResultsInfo(data) {
+        const info = document.getElementById('resultsInfo');
+        const start = data.offset + 1;
+        const end = Math.min(data.offset + data.limit, data.total);
+        info.textContent = `Showing ${start}-${end} of ${data.total} charities`;
+    }
+
+
+    showLoading() {
+        document.getElementById('loadingState').classList.remove('hidden');
+        document.getElementById('resultsSection').classList.add('hidden');
+        document.getElementById('emptyState').classList.add('hidden');
+    }
+
+    hideLoading() {
+        document.getElementById('loadingState').classList.add('hidden');
+    }
+
+    showResults() {
+        document.getElementById('resultsSection').classList.remove('hidden');
+        document.getElementById('emptyState').classList.add('hidden');
+    }
+
+    showEmpty() {
+        document.getElementById('emptyState').classList.remove('hidden');
+        document.getElementById('resultsSection').classList.add('hidden');
+    }
+
+    showError(message) {
+        this.hideLoading();
+        // You could implement a toast notification here
+        alert(message);
+    }
+}
+
+// Initialize the search functionality
+const charitySearch = new CharitySearch();
+</script>
+{% endblock %}
