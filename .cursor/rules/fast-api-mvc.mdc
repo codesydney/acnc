@@ -734,3 +734,327 @@ httpx==0.25.2  # for testing
 3. Apply advanced security, monitoring, and optimization techniques to ensure robust, performant APIs
 
 This guide provides a complete foundation for building scalable, maintainable FastAPI applications following MVC architecture and industry best practices.
+
+## 🎨 Vibecamp Design System
+
+### Brand Identity & Visual Guidelines
+
+#### Core Branding
+- **Brand Name**: "vibed coded" (lowercase, informal)
+- **Tagline**: "A Vibecamp Creation" (for footer attribution)
+- **Logo**: Use `vc-logo.svg` from `/static/img/` directory
+- **Color Philosophy**: Pure black and white aesthetic for clean, professional look
+
+#### Color Palette
+```css
+/* Primary Colors */
+--primary: #000000;        /* Pure black */
+--secondary: #6B7280;      /* Gray-500 for subtle text */
+--accent: #000000;         /* Black for accents */
+--danger: #000000;         /* Black for errors */
+
+/* Background Colors */
+--bg-primary: #ffffff;     /* Pure white */
+--bg-secondary: #ffffff;   /* White backgrounds */
+--bg-accent: #f9fafb;      /* Gray-50 for subtle sections */
+
+/* Text Colors */
+--text-primary: #000000;   /* Black text */
+--text-secondary: #6B7280; /* Gray-500 for secondary text */
+--text-muted: #9ca3af;     /* Gray-400 for muted text */
+```
+
+#### Typography System
+```css
+/* Font Families */
+--font-hand: 'Kalam', cursive, system-ui;     /* Headings, brand elements */
+--font-sans: 'Inter', system-ui, sans-serif;  /* Body text, UI elements */
+
+/* Font Weights */
+--font-light: 300;
+--font-normal: 400;
+--font-medium: 500;
+--font-semibold: 600;
+--font-bold: 700;
+
+/* Responsive Typography Scale */
+--text-xs: 0.75rem;      /* 12px */
+--text-sm: 0.875rem;     /* 14px */
+--text-base: 1rem;       /* 16px */
+--text-lg: 1.125rem;     /* 18px */
+--text-xl: 1.25rem;      /* 20px */
+--text-2xl: 1.5rem;      /* 24px */
+--text-3xl: 1.875rem;    /* 30px */
+--text-4xl: 2.25rem;     /* 36px */
+--text-5xl: 3rem;        /* 48px */
+```
+
+#### TailwindCSS Configuration
+```javascript
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: '#000000',
+        secondary: '#6B7280',
+        accent: '#000000',
+        danger: '#000000'
+      },
+      fontFamily: {
+        'sans': ['Inter', 'system-ui', 'sans-serif'],
+        'hand': ['Kalam', 'cursive', 'system-ui']
+      }
+    }
+  }
+}
+```
+
+#### Logo Integration
+```html
+<!-- Navigation Logo -->
+<h1 class="text-2xl font-hand font-bold text-black flex items-center">
+    <img src="/static/img/vc-logo.svg" alt="Logo" class="w-8 h-8 mr-2">
+    [App Name]
+</h1>
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="/static/img/vc-logo.svg">
+```
+
+#### Component Design Patterns
+
+##### Navigation Bar
+```html
+<nav class="bg-white border-b-2 border-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-hand font-bold text-black flex items-center">
+                    <img src="/static/img/vc-logo.svg" alt="Logo" class="w-8 h-8 mr-2">
+                    [App Name]
+                </h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="/" class="text-black hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium font-hand">
+                    Navigation Item
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+```
+
+##### Hero Section
+```html
+<div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-hand font-bold text-black mb-4">
+                [Hero Title]
+            </h1>
+            <p class="text-base sm:text-lg md:text-xl text-gray-600 mb-6 sm:mb-8 font-sans">
+                [Hero Description]
+            </p>
+        </div>
+    </div>
+</div>
+```
+
+##### Form Elements
+```html
+<!-- Form Container -->
+<div class="bg-white border-2 border-black rounded-lg shadow-lg p-4 sm:p-6 mb-6 sm:mb-8">
+    <h2 class="text-xl sm:text-2xl font-hand font-bold text-black mb-4 sm:mb-6">
+        <i class="fas fa-icon mr-2 text-black"></i>
+        Form Title
+    </h2>
+    
+    <!-- Input Fields -->
+    <div>
+        <label for="field" class="block text-sm font-medium text-black mb-2 font-hand">
+            Field Label
+        </label>
+        <input 
+            type="text" 
+            id="field" 
+            name="field"
+            class="w-full px-4 py-3 pl-10 border-2 border-black rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-base sm:text-lg font-sans"
+            placeholder="Placeholder text..."
+        >
+    </div>
+    
+    <!-- Select Dropdowns -->
+    <div>
+        <label for="select" class="block text-sm font-medium text-black mb-2 font-hand">
+            Select Label
+        </label>
+        <select 
+            id="select" 
+            name="select"
+            class="w-full px-3 py-2 border-2 border-black rounded-md focus:ring-2 focus:ring-black focus:border-transparent font-sans"
+        >
+            <option value="">Select option...</option>
+        </select>
+    </div>
+    
+    <!-- Checkboxes -->
+    <label class="flex items-center">
+        <input 
+            type="checkbox" 
+            id="checkbox" 
+            name="checkbox"
+            class="rounded border-2 border-black text-black focus:ring-black"
+        >
+        <span class="ml-2 text-sm text-black font-hand">Checkbox label</span>
+    </label>
+    
+    <!-- Buttons -->
+    <button 
+        type="submit"
+        class="w-full sm:w-auto bg-black text-white px-6 sm:px-8 py-3 rounded-lg hover:bg-gray-800 focus:ring-2 focus:ring-black focus:ring-offset-2 transition-colors duration-200 font-hand font-bold text-base sm:text-lg"
+    >
+        <i class="fas fa-icon mr-2"></i>
+        Button Text
+    </button>
+</div>
+```
+
+##### Cards & Content
+```html
+<!-- Content Cards -->
+<div class="bg-white border-2 border-black rounded-lg shadow-md p-4 sm:p-6 hover:shadow-lg transition-shadow duration-200">
+    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 space-y-2 sm:space-y-0">
+        <h3 class="text-lg sm:text-xl font-hand font-bold text-black">Card Title</h3>
+        <span class="px-3 py-1 bg-black text-white text-xs sm:text-sm rounded-full self-start sm:self-auto font-sans">
+            Badge
+        </span>
+    </div>
+    
+    <div class="space-y-3">
+        <div class="flex items-center text-black">
+            <i class="fas fa-icon mr-2 text-black"></i>
+            <span class="font-sans">Content text</span>
+        </div>
+    </div>
+    
+    <!-- Tags -->
+    <div class="mt-4">
+        <h4 class="text-sm font-medium text-black mb-2 font-hand">Tags:</h4>
+        <div class="flex flex-wrap gap-2">
+            <span class="px-2 py-1 bg-black text-white text-xs rounded-full font-sans">
+                Tag
+            </span>
+        </div>
+    </div>
+</div>
+```
+
+##### Pagination
+```html
+<nav class="flex flex-wrap items-center justify-center gap-2 sm:gap-1">
+    <!-- Previous Button -->
+    <button 
+        class="px-3 py-2 text-sm font-medium text-black bg-white border-2 border-black rounded-md hover:bg-black hover:text-white min-w-[80px] font-hand">
+        Previous
+    </button>
+    
+    <!-- Page Numbers -->
+    <button 
+        class="px-3 py-2 text-sm font-medium text-white bg-black rounded-md min-w-[40px] font-hand">
+        1
+    </button>
+    <button 
+        class="px-3 py-2 text-sm font-medium text-black bg-white border-2 border-black hover:bg-black hover:text-white rounded-md min-w-[40px] font-hand">
+        2
+    </button>
+    
+    <!-- Next Button -->
+    <button 
+        class="px-3 py-2 text-sm font-medium text-black bg-white border-2 border-black rounded-md hover:bg-black hover:text-white min-w-[80px] font-hand">
+        Next
+    </button>
+</nav>
+```
+
+##### Footer
+```html
+<footer class="bg-white border-t-2 border-black py-8 mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center space-y-4">
+            <div class="text-sm text-gray-600 font-sans">
+                <p>Data sourced from <a href="[data-source-url]" target="_blank" class="text-black hover:underline font-medium">[Data Source]</a></p>
+                <p>Licensed under <a href="[license-url]" target="_blank" class="text-black hover:underline font-medium">[License]</a></p>
+            </div>
+            <div class="text-sm text-black font-hand">
+                <p>A <a href="https://vibecamp.au/" target="_blank" class="text-black hover:underline font-bold">Vibecamp</a> Creation</p>
+            </div>
+        </div>
+    </div>
+</footer>
+```
+
+#### State & Loading Elements
+```html
+<!-- Loading State -->
+<div class="text-center py-12">
+    <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-black"></div>
+    <p class="mt-2 text-black font-hand">Loading...</p>
+</div>
+
+<!-- Empty State -->
+<div class="text-center py-12">
+    <i class="fas fa-icon text-4xl text-black mb-4"></i>
+    <h3 class="text-lg font-medium text-black mb-2 font-hand">No results found</h3>
+    <p class="text-black font-sans">Try adjusting your criteria</p>
+</div>
+```
+
+#### Mobile-First Responsive Patterns
+```html
+<!-- Responsive Typography -->
+<h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-hand font-bold text-black">
+    Responsive Heading
+</h1>
+
+<!-- Responsive Spacing -->
+<div class="p-4 sm:p-6 md:p-8 lg:p-12">
+    <!-- Content with responsive padding -->
+</div>
+
+<!-- Responsive Layouts -->
+<div class="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-2 sm:space-y-0">
+    <!-- Stack vertically on mobile, horizontal on larger screens -->
+</div>
+
+<!-- Responsive Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+    <!-- Responsive grid layout -->
+</div>
+```
+
+#### Required Font Imports
+```html
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+```
+
+#### Design Principles
+1. **Consistency**: Use the same color palette, typography, and spacing across all Vibecamp POC apps
+2. **Simplicity**: Clean black and white design with minimal distractions
+3. **Accessibility**: High contrast ratios and readable fonts
+4. **Mobile-First**: Design for mobile devices first, then enhance for larger screens
+5. **Brand Recognition**: Always include the Vibecamp logo and "A Vibecamp Creation" attribution
+6. **Informal Tone**: Use handwritten-style fonts for headings to maintain approachable feel
+
+#### Implementation Checklist
+- [ ] Add logo to `/static/img/vc-logo.svg`
+- [ ] Configure TailwindCSS with brand colors and fonts
+- [ ] Import required Google Fonts (Kalam, Inter)
+- [ ] Apply consistent navigation structure
+- [ ] Use black borders (border-2 border-black) for all containers
+- [ ] Apply font-hand for headings and brand elements
+- [ ] Apply font-sans for body text and UI elements
+- [ ] Include proper footer attribution
+- [ ] Test mobile responsiveness
+- [ ] Ensure high contrast accessibility
+
+This design system ensures all Vibecamp POC applications maintain consistent branding, user experience, and visual identity while being easily implementable across different project types.
