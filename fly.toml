@@ -27,3 +27,7 @@ primary_region = "syd"
 [[statics]]
   guest_path = "/app/static"
   url_prefix = "/static/"
+
+[[mounts]]
+  source = "acnc_data"
+  destination = "/data"

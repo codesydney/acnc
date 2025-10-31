@@ -2,12 +2,17 @@ from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
 from sqlmodel import SQLModel
 import os
+from pathlib import Path
 from dotenv import load_dotenv
 
 load_dotenv()
 
 # Database configuration
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///./charity_data.db")
+# Use /data directory if it exists (Fly.io volume), otherwise use local directory
+db_path = os.getenv("DATABASE_PATH", "/data/charity_data.db" if os.path.exists("/data") else "./charity_data.db")
+# Ensure parent directory exists
+Path(db_path).parent.mkdir(parents=True, exist_ok=True)
+DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite+aiosqlite:///{db_path}")
 
 # Create async engine
 engine = create_async_engine(DATABASE_URL, echo=True)
